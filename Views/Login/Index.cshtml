@@ -1,0 +1,41 @@
+﻿@inject IHttpContextAccessor context;
+
+@{
+    context.HttpContext.Session.Remove("user");
+}
+
+<section class="vh-100 ">
+    <div class="container py-5 px-md-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col text-center">
+                <img src="~/img/logo.png" class="img-fluid" alt="atlas" width="230px">
+                 
+                <form>
+                    <!-- Email input -->
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingInput" placeholder="xxx.xxx.xxx-xx">
+                        <label for="floatingInput">CPF</label>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Senha</label>
+                    </div>
+
+                  
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-outline-info btn-lg" asp-action="Login">Entrar</button>
+                    <a type="submit" class="btn btn-outline-primary btn-lg" href="https://avalia-ae.herokuapp.com">Ir para Avalia Aê!</a>
+
+
+
+
+
+                </form>
+            </div>
+           
+        </div>
+    </div>
+</section>

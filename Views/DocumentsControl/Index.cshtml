@@ -21,6 +21,7 @@
 <table class="table table-striped table-hover mt-5">
     <thead>
         <tr>
+            <th>Ver perfil</th>
             <th scope="col">Nome</th>
             <th scope="col">CPF</th>
             <th scope="col">Documento</th>
@@ -34,13 +35,14 @@
         @for(int i = 1; i <= 5; i++)
         {
             <tr>
-                <td>Mark</td>
+                <td><a href="#">Perfil</a></td>
+                <td>Nome @i</td>
                 <td>111.111.111-11</td>
                 <td><a href="#">Documento</a></td>
                 <td>Instituição @i</td>
                 <td>
                     <button class="btn btn-success">Aprovar usuário</button>
-                    <button class="btn btn-danger">Excluir</button>
+                    <button class="btn btn-danger">Reprovar</button>
 
                 </td>
             </tr>

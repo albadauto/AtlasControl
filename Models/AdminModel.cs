@@ -8,6 +8,7 @@
         public string Email { get; set; }
         public string Password { get; set; }
         public int AdminLevelId { get; set; }
+        public string AdminLevelName { get; set; }
         public AdminLevelModel AdminLevel { get; set; }
 
     }

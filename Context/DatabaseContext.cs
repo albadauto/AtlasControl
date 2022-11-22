@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AtlasControl.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace AtlasControl.Context
 {
@@ -6,7 +7,11 @@ namespace AtlasControl.Context
     {
         public DatabaseContext(DbContextOptions options) : base(options)
         {
-
         }
+
+        public DbSet<AdminModel> Admin { get; set; }
+        public DbSet<AdminLevelModel> Level { get; set; }
+
+        
     }
 }

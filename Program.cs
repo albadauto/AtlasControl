@@ -1,4 +1,6 @@
 using AtlasControl.Context;
+using AtlasControl.Repository;
+using AtlasControl.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +13,9 @@ builder.Services.AddSession(o =>
 {
     o.IdleTimeout = TimeSpan.FromHours(8);
 });
+builder.Services.AddScoped<IAdminLevelRepository, AdminLevelRepository>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 
 var app = builder.Build();
 

@@ -1,5 +1,5 @@
 ﻿@inject IHttpContextAccessor context;
-
+@model AdminModel
 @{
     context.HttpContext.Session.Remove("user");
 }
@@ -10,30 +10,26 @@
             <div class="col text-center">
                 <img src="~/img/logo.png" class="img-fluid" alt="atlas" width="230px">
                  
-                <form>
+                @using (Html.BeginForm("LoginUser", "Login", FormMethod.Post))
+                {
                     <!-- Email input -->
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="xxx.xxx.xxx-xx">
-                        <label for="floatingInput">CPF</label>
+                        <input type="email" class="form-control" id="floatingInput" placeholder="xxx.xxx.xxx-xx" asp-for="Email">
+                        <label for="floatingInput">Email</label>
                     </div>
 
                     <!-- Password input -->
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com" asp-for="Password">
                         <label for="floatingInput">Senha</label>
                     </div>
 
-                  
-
                     <!-- Submit button -->
-                    <button type="submit" class="btn btn-outline-info btn-lg" asp-action="Login">Entrar</button>
+                    <button type="submit" class="btn btn-outline-info btn-lg">Entrar</button>
                     <a type="submit" class="btn btn-outline-primary btn-lg" href="https://avalia-ae.herokuapp.com">Ir para Avalia Aê!</a>
+                }
+               
 
-
-
-
-
-                </form>
             </div>
            
         </div>

@@ -19,8 +19,17 @@ namespace AtlasControl.Controllers
         {
             AdminViewModel viewModel = new AdminViewModel();
             List<AdminLevelModel> adminLevels = _repository.getAllLevel();
+            List<AdminViewModel> adminViewModels = new List<AdminViewModel>();
+            var result = _adminRepository.FindAllUsers();
+            foreach(var item in result)
+            {
+                viewModel.Email = item.Email;
+                viewModel.Name = item.Name;
+                viewModel.AdminLevelName = item.AdminLevelName;
+                adminViewModels.Add(viewModel);
+            }
             viewModel.Level = adminLevels;
-            return View(viewModel);
+            return View(adminViewModels);
         }
 
         [HttpPost]

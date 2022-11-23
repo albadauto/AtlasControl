@@ -8,6 +8,6 @@ namespace AtlasControl.Repository.Interfaces
 
         public List<AdminViewModel> FindUser(AdminModel admin);
 
-        public AdminModel FindUserByEmail(AdminModel admin);
+        public List<AdminViewModel> FindAllUsers();
     }
 }

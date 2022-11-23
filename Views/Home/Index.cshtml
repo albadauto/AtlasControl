@@ -3,18 +3,21 @@
     ViewData["Title"] = "Home Page";
 }
 <div class="text-center">
-    <h6 class="display-6">Bem vindo(a): @context.HttpContext.Session.GetString("user")</h6>
+    <h6 class="display-6">Bem vindo(a): @context.HttpContext.Session.GetString("name") (@context.HttpContext.Session.GetString("adminLevel"))</h6>
 </div>
 <div class="text-center" style="margin-top: 10vh !important">
     <div class="container">
        
         <div class="row mb-5">
-            <div class="col">
-                <button type="button" class="btn btn-outline-primary" style="width: 250px!important; height: 200px!important;" onclick="location.href='@Url.Action("Index", "UserControl")'">
-                    <i class="bi bi-universal-access" style="font-size: 40px"></i>
-                    <h4>Controle de usuário</h4>
-                </button>
-            </div>
+            @if (context.HttpContext.Session.GetString("adminLevel") == "SUPERVISOR")
+            {
+                <div class="col">
+                    <button type="button" class="btn btn-outline-primary" style="width: 250px!important; height: 200px!important;" onclick="location.href='@Url.Action("Index", "UserControl")'">
+                        <i class="bi bi-universal-access" style="font-size: 40px"></i>
+                        <h4>Controle de usuário</h4>
+                    </button>
+                </div>
+            }
              <div class="col">
                 <button type="button" class="btn btn-outline-success" style="width: 250px!important; height: 200px!important;" onclick="location.href='@Url.Action("Index", "DocumentsControl")'">
                     <i class="bi bi-file-check-fill" style="font-size: 40px"></i>
@@ -22,7 +25,7 @@
                 </button>
             </div>
             <div class="col">
-                <button type="text/asp" class="btn btn-outline-danger" style="width: 250px!important; height: 200px! important;" onclick="location.href='@Url.Action("Index", "Login")'">
+                <button type="text/asp" class="btn btn-outline-danger" style="width: 250px!important; height: 200px! important;" onclick="location.href='@Url.Action("Exit", "Home")'">
                     <i class="bi bi-box-arrow-right" style="font-size: 40px"></i>
                     <h4>Sair</h4>
 

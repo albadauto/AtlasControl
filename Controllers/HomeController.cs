@@ -1,6 +1,7 @@
 ﻿using AtlasControl.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Runtime.Intrinsics.Arm;
 
 namespace AtlasControl.Controllers
 {
@@ -19,9 +20,11 @@ namespace AtlasControl.Controllers
 
         public IActionResult Exit()
         {
-            if(HttpContext.Session.GetString("user") != null)
+            if(HttpContext.Session.GetString("adminLevel") != null)
             {
-                HttpContext.Session.Remove("user");
+                HttpContext.Session.Remove("adminLevel");
+                HttpContext.Session.Remove("email");
+                HttpContext.Session.Remove("name");
             }
             return RedirectToAction("Index", "Login");
         }

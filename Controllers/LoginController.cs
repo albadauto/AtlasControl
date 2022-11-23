@@ -22,17 +22,22 @@ namespace AtlasControl.Controllers
         [HttpPost]
         public IActionResult LoginUser(AdminModel admin)
         {
-            var adminLevelName = "";
             CryptographyHelper crypto = new CryptographyHelper(SHA256.Create());
+            AdminViewModel adm = new AdminViewModel();
             admin.Password = crypto.hashPassword(admin.Password);
             var result = _repository.FindUser(admin);
-            foreach(var item in result)
+            
+            foreach (var item in result)
             {
-                adminLevelName = item.AdminLevelName;
+               adm.AdminLevelName = item.AdminLevelName;
+               adm.Email = item.Email;
+               adm.Name = item.Name;
             }
             if (result != null)
             {
-                HttpContext.Session.SetString("adminLevel", adminLevelName);
+                HttpContext.Session.SetString("adminLevel", adm.AdminLevelName);
+                HttpContext.Session.SetString("email", adm.Email);
+                HttpContext.Session.SetString("name", adm.Name);
                 return RedirectToAction("Index", "Home");
             }
             else

@@ -6,7 +6,7 @@ namespace AtlasControl.Repository.Interfaces
     {
         public AdminModel InsertUser(AdminModel admin);
 
-        public List<AdminModel> FindUser(AdminModel admin);
+        public List<AdminViewModel> FindUser(AdminModel admin);
 
         public AdminModel FindUserByEmail(AdminModel admin);
     }

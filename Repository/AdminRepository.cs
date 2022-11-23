@@ -13,21 +13,22 @@ namespace AtlasControl.Repository
             _context = context;
         }
 
-        public List<AdminModel> FindUser(AdminModel admin)
+        public List<AdminViewModel> FindUser(AdminModel admin)
         {
-            List<AdminModel> adm= new List<AdminModel>();    
+            List<AdminViewModel> adm = new List<AdminViewModel>();    
             var result = (from o in _context.Admin
                                        join d in _context.Level
                                        on o.AdminLevelId equals d.Id
-                                       where o.Email == o.Email &&
-                                       o.Password == o.Password
-                                       select new { o.Email, o.Password, d.LevelName });
+                                       where o.Email == admin.Email &&
+                                       o.Password == admin.Password
+                                       select new { o.Email, o.Password, d.LevelName, o.Name});
             foreach(var item in result)
             {
-                AdminModel ad = new AdminModel();
+                AdminViewModel ad = new AdminViewModel();
                 ad.Email = item.Email;
                 ad.Password = item.Password;
                 ad.AdminLevelName = item.LevelName;
+                ad.Name = item.Name;
                 adm.Add(ad);
             }
             return adm;

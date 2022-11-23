@@ -11,8 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
 <body>
-    @context.HttpContext.Session.GetString("adminLevel")
-    @if(context.HttpContext.Session.GetString("user") != null)
+    @if(context.HttpContext.Session.GetString("adminLevel") != null)
     {
         <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">

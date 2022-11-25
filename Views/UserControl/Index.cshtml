@@ -1,5 +1,4 @@
-﻿@model AdminViewModel
-
+﻿@model List<AdminViewModel>
 
 
 <div class="text-center">
@@ -7,20 +6,16 @@
 </div>
 
 
-<select class="form-select" aria-label="Default select example">
-    <option selected>Pesquisar por...</option>
-    @foreach (var level in Model.Level)
-    {
-        <option value=@level.Id>@level.LevelName</option>
-    }
-   
-</select>
+<div class="text-center">
+    <input type="text" class="form-control" placeholder="Pesquise aqui"/>
+</div>
+
 
 <div class="text-center mt-3">
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <a type="button" class="btn btn-primary" asp-action="CreateNewUser">
         Inserir novo usuário
-    </button>
+    </a>
 </div>
 @if(TempData["success"] != null)
 {
@@ -29,97 +24,34 @@
     </div>
 }
 
-
 <table class="table table-striped table-hover mt-5">
     <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Admin level</th>
+            <th scope="col">Editar/excluir</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>
-                <button class="btn btn-info">Editar parâmetros</button>
-                <button class="btn btn-danger">Excluir</button>
+        @foreach (var item in Model)
+        {
+         <tr>
+            <td>@item.Name</td>
+            <td>@item.Email</td>
+            <td>@item.AdminLevelName</td>
+                <td>
+                    <button class="btn btn-info">Editar parâmetros</button>
+                    <button class="btn btn-danger">Excluir</button>
 
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>
-                <button class="btn btn-info">Editar parâmetros</button>
-                <button class="btn btn-danger">Excluir</button>
+                </td>
+         </tr>
+          
 
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>
-                <button class="btn btn-info">Editar parâmetros</button>
-                <button class="btn btn-danger">Excluir</button>
-
-            </td>
-        </tr>
+        }
+        
+        
     </tbody>
 </table>
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Inserir novo usuário</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                @using (Html.BeginForm("InsertNewUser", "UserControl", FormMethod.Post))
-                {
-                    <div class="row mb-3">
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Nome do usuário" asp-for="Admin.Name"/>
-                        </div>
-                        <div class="col">
-                            <input type="number" class="form-control" placeholder="CPF" asp-for="Admin.Cpf"/>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col">
-                            <input type="email" class="form-control" placeholder="Email" asp-for="Admin.Email"/>
-                        </div>
-                        <div class="col">
-                            <input type="password" class="form-control" placeholder="Senha" asp-for="Admin.Password" />
-                        </div>
-                    </div>
-                    <div class="text-center mb-3">
-                        <b>Aviso!!</b> Muito cuidado ao escolher o Admin level para o usuário
-                    </div>
-                    <select class="form-select" aria-label="Default select example" asp-for="Admin.AdminLevelId">
-                     <option selected>Admin level</option>
-                         @foreach (var level in Model.Level)
-                             {
-                                 <option value=@level.Id>@level.LevelName</option>
-                             }
-
-                     </select>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-primary" >Inserir novo usuário</button>
-                    </div>
-                }
-                
-            </div>
-            
-        </div>
-    </div>
-</div>

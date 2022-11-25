@@ -26,12 +26,12 @@ namespace AtlasControl.Controllers
             AdminViewModel adm = new AdminViewModel();
             admin.Password = crypto.hashPassword(admin.Password);
             var result = _repository.FindUser(admin);
-            
             foreach (var item in result)
             {
                adm.AdminLevelName = item.AdminLevelName;
                adm.Email = item.Email;
                adm.Name = item.Name;
+               Console.WriteLine(item);
             }
             if (result != null)
             {

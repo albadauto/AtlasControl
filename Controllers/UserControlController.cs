@@ -17,19 +17,25 @@ namespace AtlasControl.Controllers
         }
         public IActionResult Index()
         {
-            AdminViewModel viewModel = new AdminViewModel();
-            List<AdminLevelModel> adminLevels = _repository.getAllLevel();
             List<AdminViewModel> adminViewModels = new List<AdminViewModel>();
             var result = _adminRepository.FindAllUsers();
-            foreach(var item in result)
+            var all = _repository.getAllLevel();
+
+            foreach (var item in result)
             {
-                viewModel.Email = item.Email;
-                viewModel.Name = item.Name;
-                viewModel.AdminLevelName = item.AdminLevelName;
-                adminViewModels.Add(viewModel);
+                adminViewModels.Add(new AdminViewModel() {
+                    Email = item.Email,
+                    AdminLevelName = item.AdminLevelName, 
+                    Name = item.Name, 
+                    Admin = new AdminModel() });
             }
-            viewModel.Level = adminLevels;
+
             return View(adminViewModels);
+        }
+
+        public IActionResult CreateNewUser()
+        {
+            return View();
         }
 
         [HttpPost]
@@ -41,5 +47,7 @@ namespace AtlasControl.Controllers
             TempData["success"] = "Novo usuário inserido com sucesso!";
             return RedirectToAction("Index", "UserControl");
         }
+
+
     }
 }

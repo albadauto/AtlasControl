@@ -19,7 +19,6 @@ namespace AtlasControl.Controllers
         {
             List<AdminViewModel> adminViewModels = new List<AdminViewModel>();
             var result = _adminRepository.FindAllUsers();
-            var all = _repository.getAllLevel();
 
             foreach (var item in result)
             {
@@ -35,7 +34,8 @@ namespace AtlasControl.Controllers
 
         public IActionResult CreateNewUser()
         {
-            return View();
+            AdminViewModel allLevel = new AdminViewModel() { Level = _repository.getAllLevel() };
+            return View(allLevel);
         }
 
         [HttpPost]

@@ -46,11 +46,10 @@ namespace AtlasControl.Repository
                           );
             foreach(var item in result)
             {
-                AdminViewModel ad = new AdminViewModel();   
-                ad.Name = item.Name;
-                ad.Email = item.Email;
-                ad.AdminLevelName = item.LevelName;
-                viewmodel.Add(ad);
+                viewmodel.Add(new AdminViewModel() { 
+                    Name = item.Name, 
+                    Email = item.Email,
+                    AdminLevelName = item.LevelName, Admin = new AdminModel() });
             }
             return viewmodel;
         }

@@ -22,6 +22,7 @@ namespace AtlasControl.Controllers
         [HttpPost]
         public IActionResult LoginUser(AdminModel admin)
         {
+            if (admin.Email == null || admin.Password == null) return RedirectToAction("Index");
             CryptographyHelper crypto = new CryptographyHelper(SHA256.Create());
             AdminViewModel adm = new AdminViewModel();
             admin.Password = crypto.hashPassword(admin.Password);
@@ -31,9 +32,9 @@ namespace AtlasControl.Controllers
                adm.AdminLevelName = item.AdminLevelName;
                adm.Email = item.Email;
                adm.Name = item.Name;
-               Console.WriteLine(item);
+               adm.Password = item.Password;
             }
-            if (result != null)
+            if (adm.Email != null && adm.Password != null)
             {
                 HttpContext.Session.SetString("adminLevel", adm.AdminLevelName);
                 HttpContext.Session.SetString("email", adm.Email);
@@ -42,6 +43,7 @@ namespace AtlasControl.Controllers
             }
             else
             {
+                TempData["loginError"] = "Usuário ou senha inexistentes, por favor, contatar supervisor";
                 return RedirectToAction("Index");
 
             }

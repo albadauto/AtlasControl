@@ -26,7 +26,7 @@ namespace AtlasControl.Controllers
                     Email = item.Email,
                     AdminLevelName = item.AdminLevelName, 
                     Name = item.Name, 
-                    Admin = new AdminModel() });
+                    Admin = new AdminModel() { Id = item.Admin.Id } });
             }
 
             return View(adminViewModels);
@@ -48,6 +48,11 @@ namespace AtlasControl.Controllers
             return RedirectToAction("Index", "UserControl");
         }
 
+        public IActionResult RemoveNewUser(int id)
+        {
+            _adminRepository.DeleteUser(id);
+            return RedirectToAction("Index");
+        }
 
     }
 }

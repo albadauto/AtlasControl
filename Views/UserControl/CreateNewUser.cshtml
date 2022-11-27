@@ -5,7 +5,7 @@
 </div>
 
 <div class="container">
-    @using (Html.BeginForm("", "", FormMethod.Post))
+    @using (Html.BeginForm("InsertNewUser", "UserControl", FormMethod.Post))
     {
         <div class="row mt-4">
 
@@ -31,6 +31,12 @@
                     }
 
                 </select>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="CPF" asp-for="Admin.Cpf" />
             </div>
         </div>
         <div class="text-center mt-5">

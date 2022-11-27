@@ -21,15 +21,18 @@ namespace AtlasControl.Repository
                                        on o.AdminLevelId equals d.Id
                                        where o.Email == admin.Email &&
                                        o.Password == admin.Password
-                                       select new { o.Email, o.Password, d.LevelName, o.Name}); //QUERY FEITA (JOIN TABELA ADMIN COM LEVEL ADMIN)
+                                       select new { o.Email, o.Password, d.LevelName, o.Name }); //QUERY FEITA (JOIN TABELA ADMIN COM LEVEL ADMIN)
             foreach(var item in result)
             {
-                AdminViewModel ad = new AdminViewModel(); //CHAMA A VIEW MODEL (UMA MODEL COM TODOS OS DADOS NECESSARIOS PARA GUARDAR O JOIN)
-                ad.Email = item.Email;
-                ad.Password = item.Password;
-                ad.AdminLevelName = item.LevelName;
-                ad.Name = item.Name;
-                adm.Add(ad); //ADICIONA NA LISTA DE ADM
+                adm.Add(new AdminViewModel()
+                {
+                    Email = item.Email,
+                    Password = item.Password,   
+                    AdminLevelName = item.LevelName,    
+                    Name = item.Name
+
+                }); //ADICIONA NA LISTA DE ADM
+
             }
             return adm;
             
@@ -42,14 +45,17 @@ namespace AtlasControl.Repository
             var result = (from o in _context.Admin
                             join d in _context.Level
                             on o.AdminLevelId equals d.Id
-                            select new { o.Email, o.Cpf, o.Name, d.LevelName }
+                            select new { o.Email, o.Cpf, o.Name, d.LevelName, o.Id }
                           );
             foreach(var item in result)
             {
-                viewmodel.Add(new AdminViewModel() { 
-                    Name = item.Name, 
+                viewmodel.Add(new AdminViewModel()
+                {
+                    Name = item.Name,
                     Email = item.Email,
-                    AdminLevelName = item.LevelName, Admin = new AdminModel() });
+                    AdminLevelName = item.LevelName,
+                    Admin = new AdminModel() { Id = item.Id }
+                });
             }
             return viewmodel;
         }
@@ -59,6 +65,20 @@ namespace AtlasControl.Repository
             _context.Admin.Add(admin);
             _context.SaveChanges();
             return admin;
+        }
+
+        public void DeleteUser(int id)
+        {
+            if(id != 0)
+            {
+                var result = _context.Admin.SingleOrDefault(x => x.Id == id);
+                _context.Admin.Remove(result);
+                _context.SaveChanges();
+            }
+            else
+            {
+                _context.SaveChanges();
+            }
         }
 
         

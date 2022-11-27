@@ -9,5 +9,6 @@ namespace AtlasControl.Repository.Interfaces
         public List<AdminViewModel> FindUser(AdminModel admin);
 
         public List<AdminViewModel> FindAllUsers();
+        public void DeleteUser(int id);
     }
 }

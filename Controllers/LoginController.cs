@@ -48,5 +48,13 @@ namespace AtlasControl.Controllers
 
             }
         }
+
+        public IActionResult ForTest()
+        {
+            HttpContext.Session.SetString("name", "José");
+            HttpContext.Session.SetString("email", "teste@teste");
+            HttpContext.Session.SetString("adminLevel", "SUPERVISOR");
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

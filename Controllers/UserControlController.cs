@@ -17,6 +17,7 @@ namespace AtlasControl.Controllers
         }
         public IActionResult Index()
         {
+           
             List<AdminViewModel> adminViewModels = new List<AdminViewModel>();
             var result = _adminRepository.FindAllUsers();
 

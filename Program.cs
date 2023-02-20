@@ -16,6 +16,8 @@ builder.Services.AddSession(o =>
 builder.Services.AddScoped<IAdminLevelRepository, AdminLevelRepository>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+builder.Services.AddScoped<IAssociationRepository, AssociationRepository>();
+
 
 var app = builder.Build();
 

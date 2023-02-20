@@ -1,12 +1,7 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
+﻿@model List<AssociationsModel>
 
 <div class="text-center">
-    <h5 class="display-5">Controle de documentos</h5>
+    <h5 class="display-5">Controle de associações</h5>
 </div>
 
 
@@ -32,22 +27,29 @@
         </tr>
     </thead>
     <tbody>
-        @for(int i = 1; i <= 5; i++)
+        @foreach (var i in Model)
         {
             <tr>
-                <td><a href="#">Perfil</a></td>
-                <td>Nome @i</td>
-                <td>111.111.111-11</td>
+                <td><a href="#">@i.User.Name</a></td>
+                <td>@i.User.Name</td>
+                <td>@i.User.Cpf</td>
                 <td><a href="#">Documento</a></td>
-                <td>Instituição @i</td>
+                <td>@i.Institution.InstitutionName</td>
                 <td>
-                    <button class="btn btn-success">Aprovar usuário</button>
+                    <a class="btn btn-success" href=@Url.Action("UpdateAssociation", "DocumentsControl", new { idAssociation = i.Id })>Aprovar usuário</a>
                     <button class="btn btn-danger">Reprovar</button>
-
                 </td>
+
             </tr>
         }
-       
-      
+
+        @if (TempData["successAssociation"] != null)
+        {
+            <div class="alert alert-success mt-5">
+                @TempData["successAssociation"]
+            </div>
+        }
+
+
     </tbody>
 </table>

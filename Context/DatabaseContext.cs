@@ -10,6 +10,10 @@ namespace AtlasControl.Context
         }
 
         public DbSet<AdminModel> Admin { get; set; }
+        public DbSet<DocumentationModel> Documentations { get; set; }
+        public DbSet<UserModel> User { get; set; }
+        public DbSet<InstitutionModel> Institution { get; set; }
+        public DbSet<AssociationsModel> Associations { get; set; }
         public DbSet<AdminLevelModel> Level { get; set; }
 
         

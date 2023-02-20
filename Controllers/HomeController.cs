@@ -1,4 +1,5 @@
 ﻿using AtlasControl.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Runtime.Intrinsics.Arm;
@@ -10,7 +11,15 @@ namespace AtlasControl.Controllers
        
         public IActionResult Index()
         {
-            return View();
+            if(HttpContext.Session.GetString("email") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                return View();
+
+            }
         }
 
         public IActionResult Privacy()

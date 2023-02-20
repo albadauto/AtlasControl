@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AtlasControl.Controllers
 {
-    public class DocumentsControlController : Controller
+    public class AssociationsControlController : Controller
     {
         private readonly IAssociationRepository _association;
-        public DocumentsControlController(IAssociationRepository association)
+        public AssociationsControlController(IAssociationRepository association)
         {
             _association = association;
         }

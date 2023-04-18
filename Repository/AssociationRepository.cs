@@ -42,14 +42,13 @@ namespace AtlasControl.Repository
             return list;
         }
 
-        public AssociationsModel SetAssociationToAccept(int idAssociation)
+        public AssociationsModel SetAssociationToAccept(int id)
         {
-            var result = _context.Associations.FirstOrDefault(x => x.Id == idAssociation);
+            var result = _context.Associations.FirstOrDefault(x => x.UserId == id);
             if(result != null)
             {
                 result.Status = "A";
                 _context.Associations.Update(result);
-                Console.WriteLine(result.Status);
                 _context.SaveChanges();
             }
             else

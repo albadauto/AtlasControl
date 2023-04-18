@@ -19,11 +19,11 @@ namespace AtlasControl.Controllers
         }
 
         [HttpGet]
-        public IActionResult UpdateAssociation(int id) 
+        public IActionResult UpdateAssociation(int Id) 
         {
             try
             {
-                _association.SetAssociationToAccept(id);
+                _association.SetAssociationToAccept(Id);
                 TempData["successAssociation"] = "Usuário aprovado para avaliação";
                 return RedirectToAction("Index");
             }

@@ -17,11 +17,13 @@ namespace AtlasControl.Controllers
             var result = _association.GetAllAssociations();
             return View(result);
         }
-        public IActionResult UpdateAssociation(int idAssociation) 
+
+        [HttpGet]
+        public IActionResult UpdateAssociation(int id) 
         {
             try
             {
-                _association.SetAssociationToAccept(idAssociation);
+                _association.SetAssociationToAccept(id);
                 TempData["successAssociation"] = "Usuário aprovado para avaliação";
                 return RedirectToAction("Index");
             }

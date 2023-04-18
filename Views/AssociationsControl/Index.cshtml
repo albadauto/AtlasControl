@@ -36,7 +36,7 @@
                 <td><a href="#">Documento</a></td>
                 <td>@i.Institution.InstitutionName</td>
                 <td>
-                    <a class="btn btn-success" href=@Url.Action("UpdateAssociation", "DocumentsControl", new { idAssociation = i.Id })>Aprovar usuário</a>
+                    <a class="btn btn-success" asp-action="UpdateAssociation" asp-controller="AssociationsControl" asp-route-id=@i.User.Id>Aprovar usuário</a>
                     <button class="btn btn-danger">Reprovar</button>
                 </td>
 

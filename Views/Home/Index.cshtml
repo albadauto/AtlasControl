@@ -17,13 +17,6 @@
                         <h4>Controle de usuário</h4>
                     </button>
                 </div>
-
-                <div class="col">
-                    <button type="button" class="btn btn-outline-secondary" style="width: 250px!important; height: 200px!important;" onclick="location.href='@Url.Action("Index", "UserControl")'">
-                        <i class="bi bi-gear" style="font-size: 40px"></i>
-                        <h4>Autenticador API</h4>
-                    </button>
-                </div>
             }
        
 
@@ -34,6 +27,15 @@
                 </button>
             </div>
             <div class="col">
+                <button type="text/asp" class="btn btn-outline-warning" style="width: 250px!important; height: 200px! important;" onclick="location.href='@Url.Action("Index", "Denounce")'">
+                    <i class="bi bi-exclamation-triangle-fill" style="font-size: 40px"></i>
+                    <h4>Denúncias</h4>
+
+                </button>
+
+            </div>
+
+             <div class="col">
                 <button type="text/asp" class="btn btn-outline-danger" style="width: 250px!important; height: 200px! important;" onclick="location.href='@Url.Action("Exit", "Home")'">
                     <i class="bi bi-box-arrow-right" style="font-size: 40px"></i>
                     <h4>Sair</h4>

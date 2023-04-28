@@ -1,7 +1,18 @@
-﻿<div class="container">
+﻿@model List<DenouncesModel>
+
+<div class="container">
     <div class="row text-center">
         <div class="col">
             <h1 class="display-5">Controle de Denúncias</h1>
         </div>
     </div>
 </div>
+
+
+@foreach(var i in Model)
+{
+    <label>@i.Avaliation.User.Name</label> <br />
+    <label>@i.Comment</label> <br />
+    <label>@i.Avaliation.Note</label>
+    <br />
+}

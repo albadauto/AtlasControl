@@ -14,6 +14,8 @@ namespace AtlasControl.Context
         public DbSet<UserModel> User { get; set; }
         public DbSet<InstitutionModel> Institution { get; set; }
         public DbSet<AssociationsModel> Associations { get; set; }
+        public DbSet<DenouncesModel> Denounces { get; set; }
+        public DbSet<AvaliationModel> Avaliations { get; set; }
         public DbSet<AdminLevelModel> Level { get; set; }
 
         

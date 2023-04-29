@@ -34,5 +34,29 @@ namespace AtlasControl.Controllers
 
         
         }
+
+        [HttpGet]
+        public IActionResult DeleteAssociation(int Id)
+        {
+            try
+            {
+                if (!_association.ReproveAssociation(Id))
+                {
+                    TempData["errorAssociation"] = "Erro: Contatar um administrador";
+                    return RedirectToAction("Index");
+
+                }
+
+                TempData["warningAssociation"] = "Associação reprovada!";
+                return RedirectToAction("Index");
+
+            }
+            catch (Exception err)
+            {
+
+                throw new Exception(err.Message);
+            }
+            
+        }
     }
 }

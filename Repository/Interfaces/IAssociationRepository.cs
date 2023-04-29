@@ -6,5 +6,6 @@ namespace AtlasControl.Repository.Interfaces
     {
         public List<AssociationsModel> GetAllAssociations();
         public AssociationsModel SetAssociationToAccept(int idAssociation);
+        public bool ReproveAssociation(int idAssociation); 
     }
 }

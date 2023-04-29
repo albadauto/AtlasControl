@@ -42,6 +42,15 @@ namespace AtlasControl.Repository
             return list;
         }
 
+        public bool ReproveAssociation(int UserId)
+        {
+            var association = _context.Associations.FirstOrDefault(x => x.User.Id == UserId);
+            if (association == null) return false;
+            _context.Associations.Remove(association);
+            _context.SaveChanges();
+            return true;
+        }
+
         public AssociationsModel SetAssociationToAccept(int id)
         {
             var result = _context.Associations.FirstOrDefault(x => x.UserId == id && x.Status == "P");
@@ -57,5 +66,6 @@ namespace AtlasControl.Repository
             }
             return result;
         }
+
     }
 }

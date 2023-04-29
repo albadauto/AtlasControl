@@ -37,7 +37,7 @@
                 <td>@i.Institution.InstitutionName</td>
                 <td>
                     <a class="btn btn-success" asp-action="UpdateAssociation" asp-controller="AssociationsControl" asp-route-id=@i.User.Id>Aprovar usuário</a>
-                    <button class="btn btn-danger">Reprovar</button>
+                    <a class="btn btn-danger" asp-action="DeleteAssociation" asp-controller="AssociationsControl" asp-route-id=@i.User.Id>Reprovar</a>
                 </td>
 
             </tr>
@@ -47,6 +47,13 @@
         {
             <div class="alert alert-success mt-5">
                 @TempData["successAssociation"]
+            </div>
+        }
+
+        @if (TempData["warningAssociation"] != null)
+        {
+            <div class="alert alert-success mt-5">
+                @TempData["warningAssociation"]
             </div>
         }
 

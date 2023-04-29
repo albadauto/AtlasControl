@@ -44,7 +44,7 @@ namespace AtlasControl.Repository
 
         public AssociationsModel SetAssociationToAccept(int id)
         {
-            var result = _context.Associations.FirstOrDefault(x => x.UserId == id);
+            var result = _context.Associations.FirstOrDefault(x => x.UserId == id && x.Status == "P");
             if(result != null)
             {
                 result.Status = "A";

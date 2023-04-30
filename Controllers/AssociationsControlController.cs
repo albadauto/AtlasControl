@@ -7,15 +7,21 @@ namespace AtlasControl.Controllers
     public class AssociationsControlController : Controller
     {
         private readonly IAssociationRepository _association;
-        public AssociationsControlController(IAssociationRepository association)
+        private readonly IDocumentationRepository _documentation;
+        public AssociationsControlController(IAssociationRepository association, IDocumentationRepository documentation)
         {
             _association = association;
+            _documentation = documentation;
         }
         public IActionResult Index()
         {
             if (HttpContext.Session.GetString("email") == null ) return RedirectToAction("Index", "Login");
-            var result = _association.GetAllAssociations();
-            return View(result);
+            DocumentViewModel docviewmodel = new DocumentViewModel
+            {
+                Associations = _association.GetAllAssociations(),
+                Documentation = _documentation.GetAllDocumentations()
+            };
+            return View(docviewmodel);
         }
 
         [HttpGet]
@@ -38,8 +44,7 @@ namespace AtlasControl.Controllers
         [HttpGet]
         public IActionResult DeleteAssociation(int Id)
         {
-            try
-            {
+            
                 if (!_association.ReproveAssociation(Id))
                 {
                     TempData["errorAssociation"] = "Erro: Contatar um administrador";
@@ -50,12 +55,7 @@ namespace AtlasControl.Controllers
                 TempData["warningAssociation"] = "Associação reprovada!";
                 return RedirectToAction("Index");
 
-            }
-            catch (Exception err)
-            {
-
-                throw new Exception(err.Message);
-            }
+            
             
         }
     }

@@ -1,5 +1,5 @@
-﻿@model List<AssociationsModel>
-
+﻿@model DocumentViewModel
+@inject IConfiguration configuration
 <div class="text-center">
     <h5 class="display-5">Controle de associações</h5>
 </div>
@@ -27,21 +27,22 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var i in Model)
-        {
-            <tr>
-                <td><a href="#">@i.User.Name</a></td>
-                <td>@i.User.Name</td>
-                <td>@i.User.Cpf</td>
-                <td><a href="#">Documento</a></td>
-                <td>@i.Institution.InstitutionName</td>
-                <td>
-                    <a class="btn btn-success" asp-action="UpdateAssociation" asp-controller="AssociationsControl" asp-route-id=@i.User.Id>Aprovar usuário</a>
-                    <a class="btn btn-danger" asp-action="DeleteAssociation" asp-controller="AssociationsControl" asp-route-id=@i.User.Id>Reprovar</a>
-                </td>
+        @foreach (var i in Model.Associations)
+            @foreach (var j in Model.Documentation)
+            {
+                <tr>
+                    <td><a href="#">@i.User.Name</a></td>
+                    <td>@i.User.Name</td>
+                    <td>@i.User.Cpf</td>
+                    <td><a href=@($"{configuration["AA_URL"]}{j.doc_uri}")>Documento</a></td>
+                    <td>@i.Institution.InstitutionName</td>
+                    <td>
+                        <a class="btn btn-success" asp-action="UpdateAssociation" asp-controller="AssociationsControl" asp-route-id=@i.User.Id>Aprovar usuário</a>
+                        <a class="btn btn-danger" asp-action="DeleteAssociation" asp-controller="AssociationsControl" asp-route-id=@i.Id>Reprovar</a>
+                    </td>
 
-            </tr>
-        }
+                </tr>
+            }
 
         @if (TempData["successAssociation"] != null)
         {
@@ -52,7 +53,7 @@
 
         @if (TempData["warningAssociation"] != null)
         {
-            <div class="alert alert-success mt-5">
+            <div class="alert alert-warning mt-5">
                 @TempData["warningAssociation"]
             </div>
         }

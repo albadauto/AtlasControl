@@ -18,7 +18,6 @@ namespace AtlasControl.Controllers
             else
             {
                 return View();
-
             }
         }
 

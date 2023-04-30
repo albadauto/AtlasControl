@@ -1,6 +1,7 @@
 ﻿using AtlasControl.Context;
 using AtlasControl.Models;
 using AtlasControl.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace AtlasControl.Repository
 {
@@ -37,16 +38,19 @@ namespace AtlasControl.Repository
                         Name = i.Name,
                         Cpf = i.Cpf
                     }
+                    
                 });
             }
             return list;
         }
 
-        public bool ReproveAssociation(int UserId)
+        public bool ReproveAssociation(int AssociationId)
         {
-            var association = _context.Associations.FirstOrDefault(x => x.User.Id == UserId);
-            if (association == null) return false;
+            var association = _context.Associations.FirstOrDefault(x => x.Id == AssociationId);
+            var documentation = _context.Documentations.FirstOrDefault(x => x.AssociationsId == AssociationId);
+            if (association == null || documentation == null) return false;
             _context.Associations.Remove(association);
+            _context.Documentations.Remove(documentation);
             _context.SaveChanges();
             return true;
         }

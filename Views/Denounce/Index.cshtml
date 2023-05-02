@@ -9,10 +9,49 @@
 </div>
 
 
-@foreach(var i in Model)
-{
-    <label>@i.Avaliation.User.Name</label> <br />
-    <label>@i.Comment</label> <br />
-    <label>@i.Avaliation.Note</label>
-    <br />
-}
+
+
+<select class="form-select" aria-label="Default select example">
+    <option selected>Pesquisar por...</option>
+    <option value="1">One</option>
+    <option value="2">Two</option>
+    <option value="3">Three</option>
+</select>
+
+
+<table class="table table-striped table-hover mt-5">
+    <thead>
+        <tr>
+            <th>Perfil</th>
+            <th scope="col">Comentário</th>
+            <th scope="col">Instituição</th>
+            <th scope="col">Nota</th>
+            <th scope="col"></th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td>@i.Avaliation.User.Name</td>
+
+                <td>@i.Comment</td>
+                <td>@i.Avaliation.Institution.InstitutionName</td>
+                <td>@i.Avaliation.Note</td>
+                <td>
+                    <a class="btn btn-success" asp-action="UpdateAssociation" asp-controller="AssociationsControl">Remover comentário</a>
+                    <a class="btn btn-danger" asp-action="DeleteAssociation" asp-controller="AssociationsControl">Despachar</a>
+                </td>
+
+
+            </tr>
+        }
+
+
+
+    </tbody>
+</table>
+
+

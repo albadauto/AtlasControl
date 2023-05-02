@@ -15,7 +15,7 @@ namespace AtlasControl.Controllers
         }
         public IActionResult Index()
         {
-            if (HttpContext.Session.GetString("email") == null ) return RedirectToAction("Index", "Login");
+            if (HttpContext.Session.GetString("email") == null) return RedirectToAction("Index", "Login");
             DocumentViewModel docviewmodel = new DocumentViewModel
             {
                 Associations = _association.GetAllAssociations(),
@@ -25,7 +25,7 @@ namespace AtlasControl.Controllers
         }
 
         [HttpGet]
-        public IActionResult UpdateAssociation(int Id) 
+        public IActionResult UpdateAssociation(int Id)
         {
             try
             {
@@ -38,13 +38,14 @@ namespace AtlasControl.Controllers
                 throw new Exception(err.Message);
             }
 
-        
+
         }
 
         [HttpGet]
         public IActionResult DeleteAssociation(int Id)
         {
-            
+            try
+            {
                 if (!_association.ReproveAssociation(Id))
                 {
                     TempData["errorAssociation"] = "Erro: Contatar um administrador";
@@ -54,9 +55,14 @@ namespace AtlasControl.Controllers
 
                 TempData["warningAssociation"] = "Associação reprovada!";
                 return RedirectToAction("Index");
+            }
+            catch (Exception err)
+            {
 
-            
-            
+                throw new Exception(err.Message);
+            }
+
+
         }
     }
 }

@@ -19,7 +19,9 @@ namespace AtlasControl.Repository
                           on i.AvaliationId equals a.Id
                           join c in _context.User
                           on a.UserId equals c.Id
-                          select new { i.Comment, c.Name, a.Note }).ToList();
+                          join l in _context.Institution
+                          on a.InstitutionId equals l.Id
+                          select new { i.Comment, c.Name, a.Note, l.InstitutionName }).ToList();
 
             foreach ( var d in result )
             {
@@ -33,6 +35,10 @@ namespace AtlasControl.Repository
                         User = new UserModel
                         {
                             Name = d.Name,
+                        },
+                        Institution = new InstitutionModel
+                        {
+                            InstitutionName = d.InstitutionName,
                         }
                     }
                 });

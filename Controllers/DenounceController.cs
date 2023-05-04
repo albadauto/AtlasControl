@@ -15,5 +15,29 @@ namespace AtlasControl.Controllers
             var result = _repository.GetAllDenounces();
             return View(result);
         }
+
+        [HttpGet]
+        public IActionResult DeleteDenounce(int Id) 
+        {
+            try
+            {
+                var result = _repository.RemoveDenounce(Id);
+                if (result)
+                {
+                    TempData["successDenounce"] = "Denúncia despachada com sucesso";
+                }
+                else
+                {
+                    TempData["errorDenounce"] = "Erro: Contatar um administrador";
+
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception err)
+            {
+
+                throw new Exception(err.Message);
+            }
+        }
     }
 }

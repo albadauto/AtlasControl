@@ -15,6 +15,8 @@ namespace AtlasControl.Controllers
         }
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("email") == null)
+                return RedirectToAction("Index", "Login");
             if (HttpContext.Session.GetString("email") == null) return RedirectToAction("Index", "Login");
             DocumentViewModel docviewmodel = new DocumentViewModel
             {

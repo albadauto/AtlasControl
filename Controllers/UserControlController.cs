@@ -17,7 +17,8 @@ namespace AtlasControl.Controllers
         }
         public IActionResult Index()
         {
-           
+            if (HttpContext.Session.GetString("email") == null)
+                return RedirectToAction("Index", "Login");
             List<AdminViewModel> adminViewModels = new List<AdminViewModel>();
             var result = _adminRepository.FindAllUsers();
 

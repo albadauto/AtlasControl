@@ -12,6 +12,8 @@ namespace AtlasControl.Controllers
         }
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("email") == null)
+                return RedirectToAction("Index", "Login");
             var result = _repository.GetAllDenounces();
             return View(result);
         }
